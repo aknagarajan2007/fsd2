@@ -2,17 +2,15 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
 
-// GET /auth/signup
 router.get('/', (req, res) => {
     res.render('signup');
 });
 
-// POST /auth/signup
 router.post('/', async (req, res) => {
     const { email, name, password } = req.body;
 
     try {
-        await execute(
+        await db.execute(
             'INSERT INTO users (email, name, password) VALUES (?, ?, ?)',
             [email, name, password]
         );
