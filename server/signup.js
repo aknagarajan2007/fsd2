@@ -2,13 +2,13 @@
 const express = require('express');
 const router = express.Router();
 
-// Display signup page
-router.get('/auth/signup', (req, res) => {
+// GET /auth/signup
+router.get('/', (req, res) => {
     res.render('signup');
 });
 
-// Process signup
-router.post('/auth/signup', async (req, res) => {
+// POST /auth/signup
+router.post('/', async (req, res) => {
     const { email, name, password } = req.body;
 
     try {
