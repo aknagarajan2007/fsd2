@@ -1,5 +1,6 @@
 
 const mysql = require('mysql2/promise');
+const fs = require('fs');
 
 const db = mysql.createPool({
     host: process.env.DB_HOST,
@@ -9,6 +10,7 @@ const db = mysql.createPool({
     database: process.env.DB_NAME,
 
     ssl: {
+        ca: fs.readFileSync(process.env.SSL_CA),
         rejectUnauthorized: true
     },
 
@@ -21,7 +23,9 @@ const db = mysql.createPool({
 (async () => {
     try {
         const connection = await db.getConnection();
+
         console.log('Aiven MySQL Connected Successfully');
+
         connection.release();
     } catch (err) {
         console.error('Aiven MySQL Error:', err.message);
