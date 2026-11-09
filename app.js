@@ -1,4 +1,3 @@
-
 const express = require('express');
 const app = express();
 const port = 3000;
@@ -15,6 +14,7 @@ app.use(express.static('./public'));
 
 ///////////// Routes /////////////////////
 app.use('/', require('./server/index.js'));
+app.use('/auth/signup', require('./server/signup.js'));
 
 
 
