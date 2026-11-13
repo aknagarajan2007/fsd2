@@ -42,7 +42,6 @@ async function startServer() {
         status('EXPRESS', '● RUNNING', COLOR.green);
         status('HOST', HOST, COLOR.cyan);
         status('PORT', PORT, COLOR.cyan);
-        status('URL', `http://localhost:${PORT}`, COLOR.cyan);
 
         console.log('\n==================================================\n');
     });
