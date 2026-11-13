@@ -1,14 +1,16 @@
-
 const nodemailer = require('nodemailer');
 const { COLOR, status } = require('../utils/logger');
 
-// Gmail transporter
+// Gmail transporter with a 10-second timeout so it doesn't hang deployments
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
-    }
+    },
+    connectionTimeout: 10000, // Fail fast after 10 seconds
+    greetingTimeout: 10000,
+    socketTimeout: 10000
 });
 
 // Verify email connection
