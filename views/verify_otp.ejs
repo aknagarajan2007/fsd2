@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VERIFY OTP | AK Fabrics</title>
+    <link rel='stylesheet' href="/css/global.css" />
+</head>
+<body>
+
+    <form action="/auth/verify_otp" method="POST">
+        <h2>EMAIL VERIFICATION</h2>
+        <p>Enter the 6-digit OTP sent to your email.</p>
+
+        <% if (err) { %>
+            <p class="error"><%= err %></p>
+        <% } %>
+
+        <input type="text" name="otp" placeholder="Enter OTP" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" minlength="6" autocomplete="one-time-code" required autofocus>
+
+        <button type="submit">VERIFY OTP</button>
+
+        <a href="/register">Back to Registration</a>
+    </form>
+
+</body>
+</html>

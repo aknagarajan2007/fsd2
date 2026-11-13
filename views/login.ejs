@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/global.css" />
+    <title>LOGIN</title>
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <% if (typeof err !== 'undefined' && err) { %>
+        <p class="error"><%= err %></p>
+    <% } %>
+
+    <form action="/auth/login" method="POST">
+    <input type="email" name="email" placeholder="Email" autocomplete="username" required autofocus>
+    <input type="password" name="password" placeholder="Password" autocomplete="current-password" required>
+    <button type="submit">LOGIN</button>
+    <div class="links">
+        <a href="/auth/register">Create Account</a>
+        <a href="/auth/forget_password">Forget Password</a>
+    </div>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INDEX</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            scrollbar-width: thin;
+        }
+
+        body {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: black;
+            animation: show 1s ease forwards;
+        }
+
+        h1 {
+            font-size: clamp(60px, 15vw, 180px);
+            color: white;
+            margin-bottom: 25px;
+        }
+
+        .btns {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .btns a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            background: #414141;
+            min-height: 45px;
+            min-width: 200px;
+            padding: 10px 20px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .btns a:hover {
+            background: white;
+            color: black;
+            transform: translateY(-3px);
+        }
+
+        @keyframes show {
+            from {
+                transform: scale(0.4);
+                filter: blur(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                filter: blur(0);
+                opacity: 1;
+            }
+        }
+
+        @media screen and (max-width: 500px) {
+            .btns {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btns a {
+                width: 200px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>INDEX</h1>
+    <div class="btns">
+        <a href="/auth/login" >SignUp</a>
+        <a href="/shop" >Shop</a>
+    </div>
+</body>
+</html>
