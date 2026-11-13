@@ -8,14 +8,15 @@ const app = express();
 // -------------------- Express configuration --------------------
 
 app.set('view engine', 'ejs');
-
 app.set('views', path.join(__dirname, './views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, './public')));
-if (process.env.TRUST_PROXY === 'true') {
+
+if (process.env.TRUST_PROXY === 'true' || process.env.NODE_ENV === 'production') {
     app.set('trust proxy', 1);
 }
+
 // -------------------- Session configuration --------------------
 
 if (!process.env.SESSION_SECRET) {
@@ -30,34 +31,23 @@ app.use(session({
     secret: process.env.SESSION_SECRET || 'development-only-secret-change-this',
     resave: false,
     saveUninitialized: false,
+    proxy: true, // Crucial for secure cookies behind Render's load balancer
     cookie: {
         httpOnly: true,
         sameSite: 'lax',
         secure: process.env.NODE_ENV === 'production',
         maxAge: 24 * 60 * 60 * 1000
     }
+    // Note: To remove the "MemoryStore" warning in production later, 
+    // install and configure 'express-mysql-session'.
 }));
 
 // -------------------- Routes --------------------
 
 app.use('/', require('./routes/index.js'));
-app.use('/auth',require('./routes/login.js'));
-app.use('/auth',require('./routes/register.js'));
-app.use('/auth',require('./routes/verify_otp.js'));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.use('/auth', require('./routes/login.js'));
+app.use('/auth', require('./routes/register.js'));
+app.use('/auth', require('./routes/verify_otp.js'));
 
 // -------------------- 404 & Error handlers --------------------
 
