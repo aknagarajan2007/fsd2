@@ -3,16 +3,21 @@ const { COLOR, status } = require('../utils/logger');
 
 // Gmail transporter with a 10-second timeout so it doesn't hang deployments
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // Use SSL
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
     },
-    connectionTimeout: 10000, // Fail fast after 10 seconds
+    // Force IPv4 to prevent Node 24+ IPv6 resolution timeouts on Render
+    tls: {
+        rejectUnauthorized: false
+    },
+    connectionTimeout: 10000, 
     greetingTimeout: 10000,
     socketTimeout: 10000
 });
-
 // Verify email connection
 sendMail.verify = async () => transporter.verify();
 
